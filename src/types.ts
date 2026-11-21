@@ -15,3 +15,15 @@ export interface ProductoVista {
   stock_minimo: number;
   stock_bajo: boolean;
 }
+
+export type TipoMovimiento = 'entrada' | 'salida';
+
+export interface MovimientoHistorial {
+  id: number;
+  producto_id: number;
+  tipo: TipoMovimiento;
+  cantidad: number;
+  nota: string | null;
+  creado_en: string;
+  productos: { nombre: string } | { nombre: string }[] | null;
+}

@@ -194,6 +194,10 @@ export function NuevoProductoView({
               No se pudieron cargar las categorías
             </p>
             <p className="mt-1 text-[#16202A]">{errorCategorias}</p>
+            <p className="mt-1 text-xs text-[#16202A]">
+              Revisa tu conexión con Supabase y vuelve a abrir esta pantalla
+              desde Inventario.
+            </p>
           </div>
         </div>
       )}
@@ -229,7 +233,7 @@ export function NuevoProductoView({
               aria-required="true"
               aria-invalid={Boolean(errores.nombre)}
               aria-describedby={errores.nombre ? 'error-nombre' : undefined}
-              className={`mt-1.5 min-h-[42px] w-full rounded-xs border bg-[#FFFFFF] px-3 py-2 text-sm text-[#16202A] placeholder:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-0 ${
+              className={`mt-1.5 min-h-[42px] w-full rounded-xs border bg-[#FFFFFF] px-3 py-2 text-sm text-[#16202A] placeholder:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-2 ${
                 errores.nombre
                   ? 'border-[#C82333] focus-visible:outline-[#C82333]'
                   : 'border-[#D8DEE6] focus-visible:border-[#146C43] focus-visible:outline-[#146C43]'
@@ -272,7 +276,7 @@ export function NuevoProductoView({
                 aria-describedby={
                   errores.categoriaId ? 'error-categoria' : undefined
                 }
-                className={`min-h-[42px] w-full appearance-none rounded-xs border bg-[#FFFFFF] py-2 pr-9 pl-3 text-sm text-[#16202A] cursor-pointer disabled:bg-[#F7F8FA] disabled:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-0 ${
+                className={`min-h-[42px] w-full appearance-none rounded-xs border bg-[#FFFFFF] py-2 pr-9 pl-3 text-sm text-[#16202A] cursor-pointer disabled:bg-[#F7F8FA] disabled:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-2 ${
                   errores.categoriaId
                     ? 'border-[#C82333] focus-visible:outline-[#C82333]'
                     : 'border-[#D8DEE6] focus-visible:border-[#146C43] focus-visible:outline-[#146C43]'
@@ -338,7 +342,7 @@ export function NuevoProductoView({
                   aria-required="true"
                   aria-invalid={Boolean(errores.precio)}
                   aria-describedby={errores.precio ? 'error-precio' : undefined}
-                  className={`min-h-[42px] w-full rounded-xs border bg-[#FFFFFF] py-2 pr-3 pl-7 text-sm text-[#16202A] tabular-nums placeholder:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-0 ${
+                  className={`min-h-[42px] w-full rounded-xs border bg-[#FFFFFF] py-2 pr-3 pl-7 text-sm text-[#16202A] tabular-nums placeholder:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-2 ${
                     errores.precio
                       ? 'border-[#C82333] focus-visible:outline-[#C82333]'
                       : 'border-[#D8DEE6] focus-visible:border-[#146C43] focus-visible:outline-[#146C43]'
@@ -386,7 +390,7 @@ export function NuevoProductoView({
                 aria-describedby={
                   errores.stockMinimo ? 'error-stock-minimo' : 'ayuda-stock-minimo'
                 }
-                className={`mt-1.5 min-h-[42px] w-full rounded-xs border bg-[#FFFFFF] px-3 py-2 text-sm text-[#16202A] tabular-nums placeholder:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-0 ${
+                className={`mt-1.5 min-h-[42px] w-full rounded-xs border bg-[#FFFFFF] px-3 py-2 text-sm text-[#16202A] tabular-nums placeholder:text-[#5A6572] focus-visible:outline-2 focus-visible:outline-offset-2 ${
                   errores.stockMinimo
                     ? 'border-[#C82333] focus-visible:outline-[#C82333]'
                     : 'border-[#D8DEE6] focus-visible:border-[#146C43] focus-visible:outline-[#146C43]'
@@ -433,6 +437,10 @@ export function NuevoProductoView({
               <div>
                 <p className="font-semibold">No se pudo guardar el producto</p>
                 <p className="mt-1 text-[#16202A]">{errorGuardar}</p>
+                <p className="mt-1 text-xs text-[#16202A]">
+                  Revisa los datos o tu conexión con Supabase e intenta guardar
+                  de nuevo.
+                </p>
               </div>
             </div>
           )}

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   AlertCircle,
-  Check,
   ChevronDown,
   Plus,
   Search,
@@ -63,7 +62,7 @@ export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
       setErrorCarga(
         err instanceof Error
           ? err.message
-          : 'Error inesperado al leer el inventario.'
+          : 'No se pudo conectar con Supabase para leer el inventario.'
       );
     } finally {
       setCargando(false);
@@ -140,8 +139,8 @@ export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
                 No se pudo cargar el inventario desde Supabase
               </p>
               <p className="mt-1 text-[#16202A]">{errorCarga}</p>
-              <p className="mt-1.5 text-xs text-[#5A6572]">
-                Verifica tu conexión o las políticas de lectura de
+              <p className="mt-1.5 text-xs text-[#16202A]">
+                Verifica tu conexión a internet o los permisos de lectura de
                 vista_productos y vuelve a intentarlo.
               </p>
             </div>
@@ -152,7 +151,7 @@ export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
             onClick={() => void cargarInventario()}
             className="min-h-[40px] rounded-xs border border-[#C82333] bg-[#FFFFFF] px-4 py-2 text-sm font-semibold text-[#C82333] transition-colors duration-150 hover:bg-[#FDF2F2] whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C82333]"
           >
-            Reintentar
+            Reintentar carga
           </button>
         </div>
       )}
@@ -220,14 +219,14 @@ export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
               onChange={(e) => setBusqueda(e.target.value)}
               placeholder="Buscar por nombre..."
               aria-label="Buscar producto por nombre"
-              className="min-h-[42px] w-full rounded-xs border border-[#D8DEE6] bg-[#FFFFFF] py-2 pr-9 pl-9 text-sm text-[#16202A] placeholder:text-[#5A6572] focus-visible:border-[#146C43] focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-[#146C43]"
+              className="min-h-[42px] w-full rounded-xs border border-[#D8DEE6] bg-[#FFFFFF] py-2 pr-9 pl-9 text-sm text-[#16202A] placeholder:text-[#5A6572] focus-visible:border-[#146C43] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#146C43]"
             />
             {busqueda !== '' && (
               <button
                 type="button"
                 onClick={() => setBusqueda('')}
                 aria-label="Borrar búsqueda"
-                className="absolute top-1/2 right-2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-xs text-[#5A6572] hover:text-[#16202A] cursor-pointer focus-visible:outline-2 focus-visible:outline-[#146C43]"
+                className="absolute top-1/2 right-2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-xs text-[#5A6572] hover:text-[#16202A] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#146C43]"
               >
                 <X className="h-4 w-4" aria-hidden="true" />
               </button>
@@ -239,7 +238,7 @@ export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
               value={categoriaFiltro}
               onChange={(e) => setCategoriaFiltro(e.target.value)}
               aria-label="Filtrar por categoría"
-              className="min-h-[42px] w-full appearance-none rounded-xs border border-[#D8DEE6] bg-[#FFFFFF] py-2 pr-9 pl-3 text-sm text-[#16202A] cursor-pointer focus-visible:border-[#146C43] focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-[#146C43]"
+              className="min-h-[42px] w-full appearance-none rounded-xs border border-[#D8DEE6] bg-[#FFFFFF] py-2 pr-9 pl-3 text-sm text-[#16202A] cursor-pointer focus-visible:border-[#146C43] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#146C43]"
             >
               <option value="todas">Todas las categorías</option>
               {categorias.map((categoria) => (
@@ -346,7 +345,7 @@ export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
                     onClick={limpiarFiltros}
                     className="mt-3 inline-flex min-h-[40px] items-center rounded-xs border border-[#D8DEE6] bg-[#FFFFFF] px-4 py-2 text-sm font-medium text-[#16202A] transition-colors duration-150 hover:border-[#16202A] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#146C43]"
                   >
-                    Limpiar filtros
+                    Quitar filtros
                   </button>
                 </td>
               </tr>
@@ -387,12 +386,8 @@ export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
                         <span>Stock bajo</span>
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1.5 font-medium text-[#146C43] whitespace-nowrap">
-                        <Check
-                          className="h-4 w-4 shrink-0"
-                          aria-hidden="true"
-                        />
-                        <span>OK</span>
+                      <span className="font-medium text-[#146C43] whitespace-nowrap">
+                        OK
                       </span>
                     )}
                   </td>
