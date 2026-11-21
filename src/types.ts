@@ -1,4 +1,4 @@
-export type VistaActiva = 'inventario' | 'movimientos';
+export type VistaActiva = 'inventario' | 'nuevo-producto' | 'movimientos';
 
 export interface Categoria {
   id: number;

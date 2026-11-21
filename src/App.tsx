@@ -1,9 +1,21 @@
 import { useState } from 'react';
 import { InventarioView } from './components/InventarioView';
+import { NuevoProductoView } from './components/NuevoProductoView';
 import type { VistaActiva } from './types';
 
 export default function App() {
   const [vistaActiva, setVistaActiva] = useState<VistaActiva>('inventario');
+  const [recargaInventario, setRecargaInventario] = useState<number>(0);
+
+  const esSeccionInventario =
+    vistaActiva === 'inventario' || vistaActiva === 'nuevo-producto';
+
+  const volverAlInventario = (recargar: boolean) => {
+    if (recargar) {
+      setRecargaInventario((prev) => prev + 1);
+    }
+    setVistaActiva('inventario');
+  };
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] text-[#16202A]">
@@ -27,9 +39,9 @@ export default function App() {
             <button
               type="button"
               onClick={() => setVistaActiva('inventario')}
-              aria-current={vistaActiva === 'inventario' ? 'page' : undefined}
+              aria-current={esSeccionInventario ? 'page' : undefined}
               className={`min-h-[40px] border-b-2 px-1 py-2 text-sm font-semibold transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#146C43] ${
-                vistaActiva === 'inventario'
+                esSeccionInventario
                   ? 'border-[#146C43] text-[#146C43]'
                   : 'border-transparent text-[#5A6572] hover:text-[#16202A]'
               }`}
@@ -54,9 +66,21 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-[1120px] px-4 py-8 sm:px-8 sm:py-10">
-        {vistaActiva === 'inventario' ? (
-          <InventarioView />
-        ) : (
+        {vistaActiva === 'inventario' && (
+          <InventarioView
+            key={recargaInventario}
+            onNuevoProducto={() => setVistaActiva('nuevo-producto')}
+          />
+        )}
+
+        {vistaActiva === 'nuevo-producto' && (
+          <NuevoProductoView
+            onCancelar={() => volverAlInventario(false)}
+            onGuardado={() => volverAlInventario(true)}
+          />
+        )}
+
+        {vistaActiva === 'movimientos' && (
           <section aria-labelledby="titulo-movimientos" className="max-w-3xl">
             <div className="mb-6 border-b border-[#D8DEE6] pb-4">
               <h1

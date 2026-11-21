@@ -11,7 +11,11 @@ import { supabase } from '../lib/supabase';
 import type { Categoria, ProductoVista } from '../types';
 import { formatearPrecio, normalizarTexto } from '../utils/format';
 
-export function InventarioView() {
+interface InventarioViewProps {
+  onNuevoProducto: () => void;
+}
+
+export function InventarioView({ onNuevoProducto }: InventarioViewProps) {
   const [productos, setProductos] = useState<ProductoVista[]>([]);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [totalMovimientos, setTotalMovimientos] = useState<number>(0);
@@ -113,7 +117,7 @@ export function InventarioView() {
 
         <button
           type="button"
-          onClick={() => {}}
+          onClick={onNuevoProducto}
           className="inline-flex min-h-[40px] items-center gap-2 rounded-xs bg-[#146C43] px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-150 hover:bg-[#105736] whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#146C43]"
         >
           <Plus className="h-4 w-4 shrink-0" aria-hidden="true" />
